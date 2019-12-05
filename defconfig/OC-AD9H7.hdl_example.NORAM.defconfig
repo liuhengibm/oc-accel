@@ -16,20 +16,22 @@ FPGACHIP="xcvu37p-fsvh2892-2-e"
 NUM_OF_ACTIONS=1
 # HLS_ACTION is not set
 # HDL_ACTION is not set
-# HDL_EXAMPLE is not set
+HDL_EXAMPLE=y
 # HDL_SINGLE_ENGINE is not set
 # HDL_MULTI_PROCESS is not set
-HDL_DATABASE=y
-# HDL_DATABASE is not set
 # HDL_UNIT_SIM is not set
 # HLS_HELLOWORLD is not set
 # HLS_MEMCOPY_1024 is not set
-HALF_WIDTH="FALSE"
+ACTION_HALF_WIDTH=y
+HALF_WIDTH="TRUE"
 # ENABLE_HLS_SUPPORT is not set
 HLS_SUPPORT="FALSE"
-DISABLE_SDRAM_AND_BRAM=y
+# DISABLE_SDRAM_AND_BRAM is not set
 # FORCE_SDRAM_OR_BRAM is not set
 SDRAM_USED="FALSE"
+# ENABLE_HBM is not set
+HBM_USED="FALSE"
+# ENABLE_BRAM is not set
 BRAM_USED="FALSE"
 DDR3_USED="FALSE"
 DDR4_USED="FALSE"
@@ -39,18 +41,13 @@ DISABLE_NVME=y
 NVME_USED="FALSE"
 USER_CLOCK="FALSE"
 # ACTION_USER_CLOCK is not set
-# SIM_XSIM is not set
+SIM_XSIM=y
 # SIM_IRUN is not set
-SIM_XCELIUM=y
+# SIM_XCELIUM is not set
 # SIM_MODELSIM is not set
 # SIM_QUESTA is not set
 # NO_SIM is not set
-NUM_OF_DATABASE_KERNELS=8
-# REGEX_64X1 is not set
-REGEX_16X1=y
-# REGEX_8X1 is not set
-DATABASE_REGEX_CONFIG="16X1"
-SIMULATOR="xcelium"
+SIMULATOR="xsim"
 DENALI_USED="FALSE"
 OCSE_PATH="../ocse"
 
@@ -60,7 +57,7 @@ OCSE_PATH="../ocse"
 SPEED_25G=y
 # SPEED_20G is not set
 PHY_SPEED="25.78125"
-AXI_ID_WIDTH=5
+AXI_ID_WIDTH=3
 # Action_clock_50MHz is not set
 # Action_clock_100MHz is not set
 # Action_clock_150MHz is not set
@@ -70,6 +67,7 @@ Action_clock_200MHz=y
 # Action_clock_350MHz is not set
 # Action_clock_400MHz is not set
 USER_CLOCK_FREQ=200
+HLS_CLOCK_PERIOD_CONSTRAINT="4ns"
 # ENABLE_ILA is not set
 ILA_DEBUG="FALSE"
 CLOUD_USER_FLOW="FALSE"

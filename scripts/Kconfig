@@ -239,13 +239,13 @@ config FORCE_SDRAM_OR_BRAM
 config FORCE_SDRAM
 	bool
 	default y
-	depends on (FORCE_SDRAM_OR_BRAM && ! ENABLE_BRAM)
-	select ENABLE_DDR
+	depends on (AD9V3 && FORCE_SDRAM_OR_BRAM && ! ENABLE_BRAM)
+    select ENABLE_DDR
 
 config ENABLE_DDR
 	bool
-	prompt "Enable SDRAM"
-	depends on ! (DISABLE_SDRAM_AND_BRAM || ENABLE_BRAM)
+	prompt "Enable DDR"
+	depends on (AD9V3 && ! (DISABLE_SDRAM_AND_BRAM || ENABLE_BRAM))
 	help
 	  This option enables the on-card SDRAM.
 	  SNAP supports FIXME GB DDR4
@@ -256,9 +256,27 @@ config SDRAM_USED
 	default "TRUE"  if ENABLE_DDR
 	default "FALSE" if ! ENABLE_DDR
 
+config FORCE_HBM
+	bool
+	default y
+	depends on ((AD9H3 || AD9H7) && FORCE_SDRAM_OR_BRAM && ! ENABLE_BRAM)
+    select ENABLE_HBM
+
+config ENABLE_HBM
+	bool
+	prompt "Enable HBM"
+	depends on ((AD9H3 || AD9H7) && ! (DISABLE_SDRAM_AND_BRAM || ENABLE_BRAM))
+	help
+	  This option enables the on-card HBM.
+
+config HBM_USED
+	string
+	default "TRUE"  if ENABLE_HBM
+	default "FALSE" if ! ENABLE_HBM
+
 config ENABLE_BRAM
 	bool
-	prompt "Enable BRAM to replace SDRAM for experimental use"
+	prompt "Enable BRAM to replace DDR or HBM for experimental use"
 	depends on ! (DISABLE_SDRAM_AND_BRAM || ENABLE_PRFLOW)
 	help
 	  This is a development option. The AXI attached on-card SDRAM will be replaced by 512KB BRAM.
@@ -601,6 +619,14 @@ config ACTION_USER_CLOCK
 	help
 	  Input 'Y' if your action's clock frequency is not 200MHz.
 	  Leave it unchecked if it is 200MHz.
+
+config HLS_CLOCK_PERIOD_CONSTRAINT
+	prompt "The clock period constrant used when hls is compiled to rtl, only used for hls action"
+	string
+	default "4ns"
+	range "1ns" "20ns"
+	help
+	  The clock period constrant in "ns" used when hls is compiled to rtl, 
 
 #config ENABLE_PRFLOW
 #	bool "Cloud build (enabling Partial Reconfiguration)"
